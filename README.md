@@ -8,7 +8,7 @@ Demo toàn diện tích hợp **Chart.js 4.x** với **ASP.NET Core MVC (.NET 8)
 
 | Công cụ | Phiên bản |
 |---------|-----------|
-| .NET SDK | 10.0 |
+| .NET SDK | 8.0+ |
 | Visual Studio | 2022 (v17.8+) hoặc VS Code |
 | Hệ điều hành | Windows / macOS / Linux |
 
