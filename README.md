@@ -4,17 +4,17 @@ Demo toàn diện tích hợp **Chart.js 4.x** với **ASP.NET Core MVC (.NET 8)
 
 ---
 
-## 📋 Yêu cầu hệ thống
+## Yêu cầu hệ thống
 
 | Công cụ | Phiên bản |
 |---------|-----------|
-| .NET SDK | 8.0+ |
+| .NET SDK | 10.0 |
 | Visual Studio | 2022 (v17.8+) hoặc VS Code |
 | Hệ điều hành | Windows / macOS / Linux |
 
 ---
 
-## 🚀 Hướng dẫn chạy project
+## Hướng dẫn chạy project
 
 ### Cách 1: Visual Studio 2022
 ```
@@ -40,7 +40,7 @@ dotnet watch run
 
 ---
 
-## 📁 Cấu trúc thư mục
+## Cấu trúc thư mục
 
 ```
 ChartDemo/
@@ -74,7 +74,7 @@ Tất cả endpoint trả về **JSON** — có thể test trực tiếp trên t
 
 ---
 
-## 📊 Các loại biểu đồ được demo
+## Các loại biểu đồ được demo
 
 | Biểu đồ | Mô tả |
 |---------|-------|
@@ -126,7 +126,7 @@ public class ChartDataController : ControllerBase
 
 ---
 
-## 📦 Thư viện sử dụng (CDN — không cần cài NuGet)
+## Thư viện sử dụng (CDN — không cần cài NuGet)
 
 - **Chart.js 4.4.3** — `cdn.jsdelivr.net`
 - **Bootstrap 5.3.3** — CSS framework
@@ -134,7 +134,7 @@ public class ChartDataController : ControllerBase
 
 ---
 
-## 🔮 Hướng phát triển tiếp theo
+## Hướng phát triển tiếp theo
 
 - [ ] Tích hợp **SignalR** để push dữ liệu realtime từ server
 - [ ] Kết nối **SQL Server** qua Entity Framework Core
