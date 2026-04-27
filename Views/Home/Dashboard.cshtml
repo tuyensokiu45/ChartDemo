@@ -1,0 +1,394 @@
+@{
+    ViewData["Title"] = "Dashboard Biểu đồ";
+}
+
+<!-- KPI Grid -->
+<div class="kpi-grid" id="kpi-section">
+    <div class="kpi-card" style="--accent-color:#6C63FF; --icon-bg:rgba(108,99,255,0.15)">
+        <div class="kpi-icon"><i class="bi bi-currency-dollar"></i></div>
+        <div class="kpi-value">3.58 tỷ</div>
+        <div class="kpi-label">Tổng doanh thu năm</div>
+        <div class="kpi-trend up"><i class="bi bi-arrow-up-short"></i> +12.4% so với 2023</div>
+    </div>
+    <div class="kpi-card" style="--accent-color:#FF6584; --icon-bg:rgba(255,101,132,0.15)">
+        <div class="kpi-icon"><i class="bi bi-bag-check"></i></div>
+        <div class="kpi-value">2,388</div>
+        <div class="kpi-label">Tổng sản phẩm đã bán</div>
+        <div class="kpi-trend up"><i class="bi bi-arrow-up-short"></i> +8.7% so với 2023</div>
+    </div>
+    <div class="kpi-card" style="--accent-color:#43CEA2; --icon-bg:rgba(67,206,162,0.15)">
+        <div class="kpi-icon"><i class="bi bi-people"></i></div>
+        <div class="kpi-value">1,247</div>
+        <div class="kpi-label">Khách hàng mới</div>
+        <div class="kpi-trend up"><i class="bi bi-arrow-up-short"></i> +5.2%</div>
+    </div>
+    <div class="kpi-card" style="--accent-color:#FFB400; --icon-bg:rgba(255,180,0,0.15)">
+        <div class="kpi-icon"><i class="bi bi-star"></i></div>
+        <div class="kpi-value">4.82</div>
+        <div class="kpi-label">Điểm đánh giá TB</div>
+        <div class="kpi-trend down"><i class="bi bi-arrow-down-short"></i> -0.05 so với Q3</div>
+    </div>
+</div>
+
+<!-- ──────────────── ROW 1: Line + Doughnut ──────────────── -->
+<div class="row g-4 mb-4">
+    <!-- Line Chart -->
+    <div class="col-lg-8" id="line-section">
+        <div class="card h-100">
+            <div class="card-header">
+                <span class="card-title-text">
+                    <i class="bi bi-graph-up"></i> Line Chart — Doanh thu theo tháng
+                </span>
+                <span style="font-size:.78rem; color:var(--text-muted)">Dữ liệu: <code>/api/chartdata/sales</code></span>
+            </div>
+            <div class="card-body">
+                <div class="chart-wrap" style="height:300px">
+                    <canvas id="lineChart"></canvas>
+                </div>
+                <!-- Code snippet -->
+                <details style="margin-top:16px">
+                    <summary style="cursor:pointer; color:var(--primary); font-size:.85rem; font-weight:600">
+                        <i class="bi bi-code-slash"></i> Xem code JavaScript
+                    </summary>
+                    <div class="code-block mt-2">
+<span class="cmt">// Fetch dữ liệu từ API rồi render Line Chart</span>
+<span class="kw">const</span> res = <span class="kw">await</span> <span class="fn">fetch</span>(<span class="str">'/api/chartdata/sales'</span>);
+<span class="kw">const</span> data = <span class="kw">await</span> res.<span class="fn">json</span>();
+
+<span class="kw">new</span> Chart(<span class="fn">document.getElementById</span>(<span class="str">'lineChart'</span>), {
+  type: <span class="str">'line'</span>,
+  data: data,
+  options: {
+    responsive: <span class="kw">true</span>,
+    plugins: { legend: { position: <span class="str">'top'</span> } },
+    scales: { y: { beginAtZero: <span class="kw">false</span> } }
+  }
+});
+                    </div>
+                </details>
+            </div>
+        </div>
+    </div>
+
+    <!-- Doughnut Chart -->
+    <div class="col-lg-4" id="pie-section">
+        <div class="card h-100">
+            <div class="card-header">
+                <span class="card-title-text">
+                    <i class="bi bi-pie-chart"></i> Doughnut Chart — Danh mục
+                </span>
+            </div>
+            <div class="card-body d-flex flex-column">
+                <div class="chart-wrap" style="height:250px">
+                    <canvas id="doughnutChart"></canvas>
+                </div>
+                <div id="donut-legend" style="margin-top:12px; font-size:.8rem;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ──────────────── ROW 2: Bar + Radar ──────────────── -->
+<div class="row g-4 mb-4">
+    <!-- Bar Chart -->
+    <div class="col-lg-7" id="bar-section">
+        <div class="card h-100">
+            <div class="card-header">
+                <span class="card-title-text">
+                    <i class="bi bi-bar-chart"></i> Bar Chart — Sản phẩm (Bán / Tồn kho)
+                </span>
+                <span style="font-size:.78rem; color:var(--text-muted)">Dữ liệu: <code>/api/chartdata/products</code></span>
+            </div>
+            <div class="card-body">
+                <div class="chart-wrap" style="height:280px">
+                    <canvas id="barChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Radar Chart -->
+    <div class="col-lg-5" id="radar-section">
+        <div class="card h-100">
+            <div class="card-header">
+                <span class="card-title-text">
+                    <i class="bi bi-diagram-3"></i> Radar Chart — So sánh thư viện
+                </span>
+                <span style="font-size:.78rem; color:var(--text-muted)">Dữ liệu: <code>/api/chartdata/radar</code></span>
+            </div>
+            <div class="card-body">
+                <div class="chart-wrap" style="height:280px">
+                    <canvas id="radarChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ──────────────── ROW 3: Realtime ──────────────── -->
+<div class="row g-4" id="realtime-section">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <span class="card-title-text">
+                    <i class="bi bi-activity"></i> Realtime Chart — Cập nhật tự động
+                    <span class="live-dot ms-2"></span>
+                    <span style="color:var(--success); font-size:.82rem">LIVE</span>
+                </span>
+                <div style="display:flex; align-items:center; gap:12px">
+                    <span id="rt-value" style="font-family:var(--mono); color:var(--primary); font-weight:700"></span>
+                    <button onclick="toggleRealtime()" id="rt-btn"
+                            style="background:rgba(67,206,162,0.15); color:#43CEA2; border:1px solid rgba(67,206,162,0.3);
+                                   border-radius:8px; padding:5px 14px; font-size:.8rem; cursor:pointer; font-weight:600">
+                        <i class="bi bi-pause-fill"></i> Tạm dừng
+                    </button>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="chart-wrap" style="height:200px">
+                    <canvas id="realtimeChart"></canvas>
+                </div>
+                <details style="margin-top:16px">
+                    <summary style="cursor:pointer; color:var(--primary); font-size:.85rem; font-weight:600">
+                        <i class="bi bi-code-slash"></i> Xem code Realtime update
+                    </summary>
+                    <div class="code-block mt-2">
+<span class="cmt">// Gọi API mỗi 1500ms, thêm điểm mới vào chart</span>
+<span class="kw">const</span> MAX_POINTS = <span class="num">20</span>;
+
+<span class="kw">async function</span> <span class="fn">fetchAndUpdate</span>() {
+  <span class="kw">const</span> { value, timestamp } = <span class="kw">await</span> (<span class="kw">await</span> <span class="fn">fetch</span>(<span class="str">'/api/chartdata/realtime'</span>)).<span class="fn">json</span>();
+
+  chart.data.labels.<span class="fn">push</span>(timestamp);
+  chart.data.datasets[<span class="num">0</span>].data.<span class="fn">push</span>(value);
+
+  <span class="kw">if</span> (chart.data.labels.length > MAX_POINTS) {
+    chart.data.labels.<span class="fn">shift</span>();          <span class="cmt">// xóa điểm cũ nhất</span>
+    chart.data.datasets[<span class="num">0</span>].data.<span class="fn">shift</span>();
+  }
+  chart.<span class="fn">update</span>(<span class="str">'active'</span>);            <span class="cmt">// re-render không giật</span>
+}
+
+<span class="kw">let</span> interval = <span class="fn">setInterval</span>(fetchAndUpdate, <span class="num">1500</span>);
+                    </div>
+                </details>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<script>
+// ═══════════════════════════════════════════════
+//  CHART.JS CONFIG CHUNG (dark theme)
+// ═══════════════════════════════════════════════
+Chart.defaults.color          = '#8B87B0';
+Chart.defaults.borderColor    = 'rgba(108,99,255,0.12)';
+Chart.defaults.font.family    = "'Space Grotesk', sans-serif";
+Chart.defaults.font.size      = 12;
+
+const GRID_COLOR  = 'rgba(108,99,255,0.1)';
+const TICK_COLOR  = '#8B87B0';
+
+// ── Helper: build common scale options ──────────
+function darkScales(min = undefined) {
+    return {
+        x: { grid: { color: GRID_COLOR }, ticks: { color: TICK_COLOR } },
+        y: { grid: { color: GRID_COLOR }, ticks: { color: TICK_COLOR },
+             beginAtZero: min === undefined, min }
+    };
+}
+
+// ═══════════════════════════════════════════════
+//  1. LINE CHART
+// ═══════════════════════════════════════════════
+(async () => {
+    const res  = await fetch('/api/chartdata/sales');
+    const data = await res.json();
+
+    new Chart(document.getElementById('lineChart'), {
+        type: 'line',
+        data,
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: { mode: 'index', intersect: false },
+            plugins: {
+                legend: { labels: { color: '#E8E6FF', usePointStyle: true, padding: 20 } },
+                tooltip: { backgroundColor: '#1A1828', borderColor: 'rgba(108,99,255,.3)', borderWidth: 1 }
+            },
+            scales: darkScales(100)
+        }
+    });
+})();
+
+// ═══════════════════════════════════════════════
+//  2. BAR CHART
+// ═══════════════════════════════════════════════
+(async () => {
+    const res  = await fetch('/api/chartdata/products');
+    const data = await res.json();
+
+    new Chart(document.getElementById('barChart'), {
+        type: 'bar',
+        data,
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { labels: { color: '#E8E6FF', usePointStyle: true } },
+                tooltip: { backgroundColor: '#1A1828', borderColor: 'rgba(108,99,255,.3)', borderWidth: 1 }
+            },
+            scales: darkScales()
+        }
+    });
+})();
+
+// ═══════════════════════════════════════════════
+//  3. DOUGHNUT CHART
+// ═══════════════════════════════════════════════
+(async () => {
+    const res  = await fetch('/api/chartdata/category');
+    const data = await res.json();
+
+    new Chart(document.getElementById('doughnutChart'), {
+        type: 'doughnut',
+        data,
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            cutout: '68%',
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    backgroundColor: '#1A1828',
+                    borderColor: 'rgba(108,99,255,.3)',
+                    borderWidth: 1,
+                    callbacks: {
+                        label: ctx => ` ${ctx.label}: ${ctx.parsed}%`
+                    }
+                }
+            }
+        }
+    });
+
+    // Custom legend
+    const legend = document.getElementById('donut-legend');
+    const colors = data.datasets[0].backgroundColor;
+    legend.innerHTML = data.labels.map((label, i) =>
+        `<div style="display:inline-flex;align-items:center;gap:6px;margin:3px 8px 3px 0">
+            <span style="width:10px;height:10px;border-radius:50%;background:${colors[i]};display:inline-block"></span>
+            <span style="color:var(--text-muted)">${label}</span>
+            <strong style="color:var(--text)">${data.datasets[0].data[i]}%</strong>
+         </div>`
+    ).join('');
+})();
+
+// ═══════════════════════════════════════════════
+//  4. RADAR CHART
+// ═══════════════════════════════════════════════
+(async () => {
+    const res  = await fetch('/api/chartdata/radar');
+    const data = await res.json();
+
+    new Chart(document.getElementById('radarChart'), {
+        type: 'radar',
+        data,
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                r: {
+                    min: 0, max: 100,
+                    ticks: { color: TICK_COLOR, backdropColor: 'transparent', stepSize: 20 },
+                    grid:  { color: GRID_COLOR },
+                    pointLabels: { color: '#E8E6FF', font: { size: 11 } },
+                    angleLines: { color: GRID_COLOR }
+                }
+            },
+            plugins: {
+                legend: { labels: { color: '#E8E6FF', usePointStyle: true } }
+            }
+        }
+    });
+})();
+
+// ═══════════════════════════════════════════════
+//  5. REALTIME CHART
+// ═══════════════════════════════════════════════
+const MAX_POINTS = 20;
+const rtCtx = document.getElementById('realtimeChart');
+
+const realtimeChart = new Chart(rtCtx, {
+    type: 'line',
+    data: {
+        labels: [],
+        datasets: [{
+            label: 'Giá trị (đơn vị)',
+            data: [],
+            borderColor: '#43CEA2',
+            backgroundColor: 'rgba(67,206,162,0.1)',
+            fill: true,
+            tension: 0.4,
+            pointRadius: 3,
+            borderWidth: 2
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        animation: { duration: 300 },
+        plugins: {
+            legend: { labels: { color: '#E8E6FF' } },
+            tooltip: { backgroundColor: '#1A1828', borderColor: 'rgba(67,206,162,.3)', borderWidth: 1 }
+        },
+        scales: {
+            x: { grid: { color: GRID_COLOR }, ticks: { color: TICK_COLOR, maxTicksLimit: 6 } },
+            y: { min: 0, max: 150, grid: { color: GRID_COLOR }, ticks: { color: TICK_COLOR } }
+        }
+    }
+});
+
+let rtRunning = true;
+let rtInterval;
+
+async function fetchAndUpdate() {
+    const res  = await fetch('/api/chartdata/realtime');
+    const { value, timestamp } = await res.json();
+
+    document.getElementById('rt-value').textContent = `Giá trị hiện tại: ${value}`;
+
+    realtimeChart.data.labels.push(timestamp);
+    realtimeChart.data.datasets[0].data.push(value);
+
+    if (realtimeChart.data.labels.length > MAX_POINTS) {
+        realtimeChart.data.labels.shift();
+        realtimeChart.data.datasets[0].data.shift();
+    }
+    realtimeChart.update('active');
+}
+
+// Khởi động ngay lần đầu
+fetchAndUpdate();
+rtInterval = setInterval(fetchAndUpdate, 1500);
+
+function toggleRealtime() {
+    const btn = document.getElementById('rt-btn');
+    if (rtRunning) {
+        clearInterval(rtInterval);
+        btn.innerHTML = '<i class="bi bi-play-fill"></i> Tiếp tục';
+        btn.style.background = 'rgba(255,101,132,0.15)';
+        btn.style.color      = '#FF6584';
+        btn.style.borderColor= 'rgba(255,101,132,0.3)';
+    } else {
+        fetchAndUpdate();
+        rtInterval = setInterval(fetchAndUpdate, 1500);
+        btn.innerHTML = '<i class="bi bi-pause-fill"></i> Tạm dừng';
+        btn.style.background = 'rgba(67,206,162,0.15)';
+        btn.style.color      = '#43CEA2';
+        btn.style.borderColor= 'rgba(67,206,162,0.3)';
+    }
+    rtRunning = !rtRunning;
+}
+</script>
+}

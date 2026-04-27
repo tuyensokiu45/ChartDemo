@@ -1,0 +1,181 @@
+@{
+    ViewData["Title"] = "Trang chủ";
+}
+
+<style>
+    .hero {
+        background: linear-gradient(135deg, rgba(108,99,255,0.15) 0%, rgba(255,101,132,0.08) 100%);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        padding: 56px 48px;
+        text-align: center;
+        margin-bottom: 36px;
+        position: relative;
+        overflow: hidden;
+    }
+    .hero::before {
+        content: '';
+        position: absolute;
+        top: -60px; right: -60px;
+        width: 260px; height: 260px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(108,99,255,0.2), transparent 70%);
+    }
+    .hero-title { font-size: 2.6rem; font-weight: 700; line-height: 1.15; margin-bottom: 16px; }
+    .hero-title span { color: var(--primary); }
+    .hero-sub { color: var(--text-muted); font-size: 1.05rem; max-width: 600px; margin: 0 auto 28px; }
+    .btn-primary-custom {
+        background: var(--primary); color: #fff;
+        border: none; border-radius: 10px;
+        padding: 12px 32px; font-weight: 600; font-size: .95rem;
+        text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+        transition: transform .2s, box-shadow .2s;
+    }
+    .btn-primary-custom:hover { color:#fff; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(108,99,255,0.4); }
+
+    .feature-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; margin-bottom: 36px; }
+    .feature-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 28px 24px;
+        transition: border-color .25s, transform .25s;
+    }
+    .feature-card:hover { border-color: var(--primary); transform: translateY(-3px); }
+    .feature-icon {
+        font-size: 2rem;
+        margin-bottom: 14px;
+        display: block;
+    }
+    .feature-card h5 { font-weight: 700; margin-bottom: 8px; }
+    .feature-card p  { color: var(--text-muted); font-size: .88rem; margin: 0; line-height: 1.6; }
+
+    .table-dark-custom {
+        background: var(--surface);
+        color: var(--text);
+        border-radius: var(--radius);
+        overflow: hidden;
+    }
+    .table-dark-custom thead th {
+        background: var(--surface2);
+        border-color: var(--border);
+        color: var(--text-muted);
+        font-size: .82rem;
+        letter-spacing: .04em;
+        text-transform: uppercase;
+        padding: 14px 18px;
+    }
+    .table-dark-custom td {
+        border-color: var(--border);
+        padding: 13px 18px;
+        vertical-align: middle;
+    }
+    .badge-oss  { background: rgba(67,206,162,0.2); color: #43CEA2; border-radius: 6px; padding: 3px 10px; font-size: .78rem; }
+    .badge-com  { background: rgba(255,180,0,0.2);  color: #FFB400;  border-radius: 6px; padding: 3px 10px; font-size: .78rem; }
+    .star { color: #FFB400; }
+</style>
+
+<!-- Hero -->
+<div class="hero">
+    <div class="hero-title">Chart Control cho<br><span>ASP.NET Core</span> MVC</div>
+    <p class="hero-sub">
+        Demo toàn diện các loại biểu đồ sử dụng <strong>Chart.js 4.x</strong> tích hợp với
+        <strong>ASP.NET Core MVC .NET 8</strong> — REST API, Razor View, và Realtime Update.
+    </p>
+    <a asp-controller="Home" asp-action="Dashboard" class="btn-primary-custom">
+        <i class="bi bi-speedometer2"></i> Xem Dashboard
+    </a>
+</div>
+
+<!-- Feature cards -->
+<div class="feature-grid">
+    <div class="feature-card">
+        <span class="feature-icon">📊</span>
+        <h5>5 loại biểu đồ</h5>
+        <p>Line, Bar, Doughnut, Radar, và Realtime — đầy đủ cho mọi trường hợp trực quan hóa dữ liệu.</p>
+    </div>
+    <div class="feature-card">
+        <span class="feature-icon">⚡</span>
+        <h5>REST API JSON</h5>
+        <p>Dữ liệu được cung cấp qua <code style="color:var(--primary)">/api/chartdata/*</code> — tách biệt backend & frontend rõ ràng.</p>
+    </div>
+    <div class="feature-card">
+        <span class="feature-icon">🔄</span>
+        <h5>Realtime Update</h5>
+        <p>Biểu đồ cập nhật tự động mỗi 1.5 giây, mô phỏng dữ liệu đến từ server theo thời gian thực.</p>
+    </div>
+    <div class="feature-card">
+        <span class="feature-icon">🎨</span>
+        <h5>Thiết kế chuyên nghiệp</h5>
+        <p>Giao diện Dark theme, sidebar navigation, KPI cards — sẵn sàng cho báo cáo thực tế.</p>
+    </div>
+    <div class="feature-card">
+        <span class="feature-icon">🏗️</span>
+        <h5>MVC Pattern chuẩn</h5>
+        <p>Controller, Model, View được phân tầng rõ ràng theo đúng kiến trúc ASP.NET Core MVC.</p>
+    </div>
+    <div class="feature-card">
+        <span class="feature-icon">📦</span>
+        <h5>Zero NuGet nặng</h5>
+        <p>Chỉ dùng Chart.js CDN, không cần cài thêm package phức tạp — nhẹ và dễ triển khai.</p>
+    </div>
+</div>
+
+<!-- So sánh thư viện -->
+<div class="card">
+    <div class="card-header">
+        <span class="card-title-text"><i class="bi bi-table"></i> So sánh các thư viện Chart Control</span>
+    </div>
+    <div class="card-body p-0">
+        <table class="table table-dark-custom mb-0">
+            <thead>
+                <tr>
+                    <th>Thư viện</th><th>Loại</th><th>Hiệu năng</th>
+                    <th>Cộng đồng</th><th>Tích hợp .NET</th><th>Chi phí</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Chart.js</strong> ⭐ <span style="font-size:.75rem;color:var(--success)">← Dùng trong demo</span></td>
+                    <td><span class="badge-oss">Mã nguồn mở</span></td>
+                    <td><span class="star">★★★★</span>★</td>
+                    <td><span class="star">★★★★★</span></td>
+                    <td><span class="star">★★★</span>★★</td>
+                    <td style="color:var(--success)">Miễn phí</td>
+                </tr>
+                <tr>
+                    <td><strong>ApexCharts</strong></td>
+                    <td><span class="badge-oss">Mã nguồn mở</span></td>
+                    <td><span class="star">★★★★</span>★</td>
+                    <td><span class="star">★★★★</span>★</td>
+                    <td><span class="star">★★★</span>★★</td>
+                    <td style="color:var(--success)">Miễn phí</td>
+                </tr>
+                <tr>
+                    <td><strong>Syncfusion</strong></td>
+                    <td><span class="badge-com">Thương mại</span></td>
+                    <td><span class="star">★★★★★</span></td>
+                    <td><span class="star">★★★</span>★★</td>
+                    <td><span class="star">★★★★★</span></td>
+                    <td style="color:var(--secondary)">Có phí</td>
+                </tr>
+                <tr>
+                    <td><strong>Telerik / Kendo UI</strong></td>
+                    <td><span class="badge-com">Thương mại</span></td>
+                    <td><span class="star">★★★★★</span></td>
+                    <td><span class="star">★★★★</span>★</td>
+                    <td><span class="star">★★★★★</span></td>
+                    <td style="color:var(--secondary)">Có phí</td>
+                </tr>
+                <tr>
+                    <td><strong>DevExpress</strong></td>
+                    <td><span class="badge-com">Thương mại</span></td>
+                    <td><span class="star">★★★★★</span></td>
+                    <td><span class="star">★★★</span>★★</td>
+                    <td><span class="star">★★★★★</span></td>
+                    <td style="color:var(--secondary)">Cao</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
